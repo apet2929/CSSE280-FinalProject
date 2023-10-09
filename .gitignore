@@ -12,3 +12,18 @@ Cargo.lock
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+# React + Typescript
+frontend/csse280-final-project/.DS_*
+frontend/csse280-final-project/*.log
+frontend/csse280-final-project/logs
+frontend/csse280-final-project/**/*.backup.*
+frontend/csse280-final-project/**/*.back.*
+
+frontend/csse280-final-project/node_modules
+frontend/csse280-final-project/bower_components
+frontend/csse280-final-project/*.sublime*
+
+frontend/csse280-final-project/psd
+frontend/csse280-final-project/thumb
+frontend/csse280-final-project/sketch
