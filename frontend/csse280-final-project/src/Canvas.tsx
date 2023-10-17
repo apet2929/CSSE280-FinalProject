@@ -10,7 +10,7 @@ import {
   type CanvasProps = {
     canvasWidth: number;
     canvasHeight: number;
-    image: HTMLImageElement;
+    image: Path2D;
   };
   
   type Point = {
@@ -141,13 +141,13 @@ import {
         const storedTransform = context.getTransform();
         context.canvas.width = context.canvas.width;
         context.setTransform(storedTransform);
-        context.drawImage(props.image, 0, 0)
-        context.fillRect(
-          props.canvasWidth / 2 - squareSize / 2,
-          props.canvasHeight / 2 - squareSize / 2,
-          squareSize,
-          squareSize
-        );
+        context.fill(props.image)
+        // context.fillRect(
+        //   props.canvasWidth / 2 - squareSize / 2,
+        //   props.canvasHeight / 2 - squareSize / 2,
+        //   squareSize,
+        //   squareSize
+        // );
         context.arc(viewportTopLeft.x, viewportTopLeft.y, 5, 0, 2 * Math.PI);
         context.fillStyle = "red";
         context.fill();
