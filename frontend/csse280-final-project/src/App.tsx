@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 import './App.css';
+import { MapView } from './MapView';
 
 const ExampleToast = ({ children } : {children : any}) => {
   const [show, toggleShow] = useState(true);
@@ -32,6 +33,7 @@ const App = () => (
           🎉
         </span>
       </ExampleToast>
+      <MapView name="map world!" />
     </Container>
   </Container>
 );
