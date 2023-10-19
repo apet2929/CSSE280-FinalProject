@@ -7,17 +7,18 @@ import {
   } from "react";
   import * as React from "react";
   
+
   type CanvasProps = {
     canvasWidth: number;
     canvasHeight: number;
-    image: Path2D;
+    counties: Map<string,JSX.Element>;
+    colors: Map<string,string>;
   };
   
   type Point = {
     x: number;
     y: number;
   };
-  
   const ORIGIN = Object.freeze({ x: 0, y: 0 });
   
   // adjust to device to avoid blur
@@ -47,7 +48,6 @@ import {
     const isResetRef = useRef<boolean>(false);
     const lastMousePosRef = useRef<Point>(ORIGIN);
     const lastOffsetRef = useRef<Point>(ORIGIN);
-  
     // update last offset
     useEffect(() => {
       lastOffsetRef.current = offset;
@@ -141,7 +141,15 @@ import {
         const storedTransform = context.getTransform();
         context.canvas.width = context.canvas.width;
         context.setTransform(storedTransform);
-        context.fill(props.image)
+        for(const key of props.counties.keys()) {
+          const county_svg: JSX.Element | undefined = props.counties.get(key);
+          let path = new Path2D(county_svg?.props.d);
+          let color = props.colors.get(key);
+          if(color != undefined) context.fillStyle = color;
+          console.log(path);
+          context.fill(path);
+          context.stroke(path);
+        }
         // context.fillRect(
         //   props.canvasWidth / 2 - squareSize / 2,
         //   props.canvasHeight / 2 - squareSize / 2,
