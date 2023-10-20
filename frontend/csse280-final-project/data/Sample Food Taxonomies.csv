@@ -1,0 +1,13 @@
+﻿Agency_ID,Site_ID,Service_ID,Status,Category_Code,Category_Name,Subcategory_Code,Subcategory_Name,VL_Taxonomy_Code_1,Taxonomy_Name_1,VL_Target_Term,Target_Term_Name
+10,11,9907,Active,B,Basic Needs,BD,Food,BD-1800.2000,Food Pantries,,
+1000,1731,8932,Active,B,Basic Needs,BD,Food,BD-1800.2250,Food Vouchers,,
+10000,15961,24668,Active,B,Basic Needs,BD,Food,BD-1800.2250,Food Vouchers,,
+10221,16908,25090,Active,B,Basic Needs,BD,Food,BD-1800.2000,Food Pantries,,
+10221,16908,25090,Active,B,Basic Needs,BD,Food,BD-1800.8200-250,Formula/Baby Food,,
+105,160,15068,Active,B,Basic Needs,BD,Food,BD-1800.2250,Food Vouchers,YB-8000,Older Adults
+105,165,15071,Active,B,Basic Needs,BD,Food,BD-1800.2250,Food Vouchers,YB-8000,Older Adults
+105,158,12350,Active,B,Basic Needs,BD,Food,BD-5000.3500,Home Delivered Meals, , 
+105,158,15067,Active,B,Basic Needs,BD,Food,BD-1800.2250,Food Vouchers,YB-8000,Older Adults
+105,161,15069,Active,B,Basic Needs,BD,Food,BD-1800.2250,Food Vouchers,YB-8000,Older Adults
+1050,1784,9233,Active,B,Basic Needs,BD,Food,BD-5000.8300,Soup Kitchens,,
+10660,54221,43210,Active,B,Basic Needs,BD,Food,BD-5000.1500,Congregate Meals/Nutrition Sites,,
