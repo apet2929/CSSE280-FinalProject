@@ -1,3 +1,5 @@
+import { log } from "console";
+import { off } from "process";
 import {
     useEffect,
     useCallback,
@@ -52,6 +54,29 @@ import {
     useEffect(() => {
       lastOffsetRef.current = offset;
     }, [offset]);
+
+    function  getMousePos(canvas: any, evt: any) {
+      var rect = canvas.getBoundingClientRect(), // abs. size of element
+        scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for x
+        scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for y
+    
+      return {
+        x: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
+        y: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+      }
+    }
+
+    const onClick = (e: any) => {
+      console.log(e);
+      let pos = getMousePos(canvasRef.current, e); // get adjusted coordinates as above
+      for(const [key, svg_elem] of props.counties) {
+        let path = new Path2D(svg_elem.props.d);
+        if(context != null && context.isPointInPath(path, pos.x, pos.y)) {
+          console.log(key);
+        }
+      }
+      
+    }
   
     // reset
     const reset = useCallback(
@@ -146,16 +171,11 @@ import {
           let path = new Path2D(county_svg?.props.d);
           let color = props.colors.get(key);
           if(color != undefined) context.fillStyle = color;
-          console.log(path);
           context.fill(path);
           context.stroke(path);
+        
         }
-        // context.fillRect(
-        //   props.canvasWidth / 2 - squareSize / 2,
-        //   props.canvasHeight / 2 - squareSize / 2,
-        //   squareSize,
-        //   squareSize
-        // );
+
         context.arc(viewportTopLeft.x, viewportTopLeft.y, 5, 0, 2 * Math.PI);
         context.fillStyle = "red";
         context.fill();
@@ -240,7 +260,9 @@ import {
         <pre>offset: {JSON.stringify(offset)}</pre>
         <pre>viewportTopLeft: {JSON.stringify(viewportTopLeft)}</pre>
         <canvas
+          id="canvas"
           onMouseDown={startPan}
+          onClick={onClick}
           ref={canvasRef}
           width={props.canvasWidth * ratio}
           height={props.canvasHeight * ratio}

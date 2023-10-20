@@ -103,6 +103,7 @@ let county_svgs = [
   county_svgs.forEach((svg_elem) => {
     let id = svg_elem.props.id as string | null;
     
+    
     let r = Math.random()*255;
     let g = Math.random()*255;
     let b = Math.random()*255;
