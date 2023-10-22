@@ -1,6 +1,6 @@
 import * as React from "react";
 import Canvas from "./Canvas";
-
+import County from "./County";
 
 let county_svgs = [
   <path d="M 549.16 223.67 566.5 223.17 565.25 170.85 590.81 170.41 604.9 169.85 606.24 204.64 607.32 239.48 587.15 240.12 549.76 240.93 549.16 223.67 Z" id="Wells" fill="#b3c4db"/>,
@@ -97,21 +97,40 @@ let county_svgs = [
   <path d="M 517.45 483.96 525.79 483.8 525.66 463.37 576.93 462.34 577.56 482.54 577.82 499.19 555.85 514.08 536.47 526.94 517.77 527.62 517.39 501.62 517.45 483.96 Z" id="Decatur" fill="#e8e5d9"/>,
   ]
 
-  let counties = new Map<string, JSX.Element>();
-  let colors = new Map<string, string>();
+  
 
-  county_svgs.forEach((svg_elem) => {
-    let id = svg_elem.props.id as string | null;
-    
-    
+  
+
+  let getColor = (oldColor: string): string => {
+    // oldColor: used to map between old rendered values and our new color palette
     let r = Math.random()*255;
     let g = Math.random()*255;
     let b = Math.random()*255;
     let color = `rgb(${r},${g},${b})`
+    return color;
+  }
+
+  let counties = new Map<string, County>();
+
+  county_svgs.forEach((svg_elem) => {
+    let id = svg_elem.props.id as string | null;
     
+    let onClick = (county_id: string, e: Event) => {
+      console.log(e);
+      let county = counties.get(county_id)
+      console.log(county);
+      
+    }
+
     if(id != null){
-      colors.set(id, color);
-      counties.set(id, svg_elem);
+      let county: County = {
+        name: id,
+        color: getColor(svg_elem.props.fill),
+        path: new Path2D(svg_elem.props.d),
+        onClick: onClick
+      };
+    
+      counties.set(id, county);
     } 
   })
 
@@ -121,8 +140,7 @@ export interface Props {
 }
 
 export const MapView: React.FC<Props> = props => {
-    return <div>
-        {props.name}
-        <Canvas canvasWidth={500} canvasHeight={800} counties={counties} colors={colors}/>
+    return <div className="h-100 d-flex align-items-center justify-content-center">
+      <Canvas canvasWidth={800} canvasHeight={800} counties={counties}/>
     </div>
 }

@@ -23,20 +23,17 @@ const ExampleToast = ({ children } : {children : any}) => {
   );
 };
 
-const App = () => (
-  <Container className="p-3">
-    <Container className="p-5 mb-4 bg-light rounded-3">
-      <h1 className="header">Welcome To React-Bootstrap</h1>
-      <ExampleToast>
-        We now have Toasts
-        <span role="img" aria-label="tada">
-          🎉
-        </span>
-      </ExampleToast>
-      <MapView name="map world!" />
-    </Container>
+const App = () => {
+  let root = document.getElementById('root')
+  if(root) {
+    root.style.height = "100vh";
+  }
+  return (
+  <Container className="p-3 h-100">
+    <MapView name="map world!" />
   </Container>
 );
+  }
 
 
 export default App;
