@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+#header {
+  width: 75%;
+  height: 45px;
+  border-radius: 30px;
+  left: 0; 
+  right: 0; 
+  top: 30px;
+  text-align: center;
+
+  color: #FFEEDB;
+  margin-left: auto; 
+  margin-right: auto; 
+  background-color: #42033D;
+}
+
+#header > h3 {
+  padding: 0.25rem 0;
+}

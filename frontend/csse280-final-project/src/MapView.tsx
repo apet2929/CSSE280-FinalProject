@@ -134,13 +134,11 @@ let county_svgs = [
     } 
   })
 
-export interface Props {
-  name: string;
-  priority?: boolean;
-}
+interface MapViewProps {
+  width: number,
+  height: number
+};
 
-export const MapView: React.FC<Props> = props => {
-    return <div className="h-100 d-flex align-items-center justify-content-center">
-      <Canvas canvasWidth={800} canvasHeight={800} counties={counties}/>
-    </div>
+export const MapView = (props: MapViewProps) => {
+  return <Canvas canvasWidth={props.width} canvasHeight={props.height} counties={counties}/>
 }
