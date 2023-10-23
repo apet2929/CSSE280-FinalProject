@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import './App.css';
 import { MapView } from './MapView';
 import PageHeader from './PageHeader';
+import ServiceTableData from './ServiceTableData';
 
 const ExampleToast = ({ children } : {children : any}) => {
   const [show, toggleShow] = useState(true);
@@ -50,7 +51,11 @@ const App = () => {
         world
       </div>
     </div>
-    
+    <div className="row">
+        <ul>
+          <ServiceTableData />
+        </ul>
+    </div>
   </div>
   );
 }
