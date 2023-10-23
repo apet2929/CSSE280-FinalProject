@@ -52,7 +52,7 @@ const App = () => {
       </div>
     </div>
     <div className="row">
-        <ul>
+        <ul className="list-unstyled">
           <ServiceTableData />
         </ul>
     </div>
