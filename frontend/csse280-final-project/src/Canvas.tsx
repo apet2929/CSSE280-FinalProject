@@ -12,7 +12,7 @@ type CanvasProps = {
   canvasWidth: number;
   canvasHeight: number;
   counties: Map<string, County>;
-  
+  onClick: Function
 };
 
 type Point = {
@@ -71,8 +71,9 @@ export default function Canvas(props: CanvasProps) {
       if(context != null && context.isPointInPath(county.path, pos.x, pos.y)) {
         console.log(key);
         county.onClick(key, e);
+        props.onClick(key)
       }
-    }
+    }    
   }
 
   // reset

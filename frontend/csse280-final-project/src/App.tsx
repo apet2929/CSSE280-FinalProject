@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import './App.css';
 import { MapView } from './MapView';
 import PageHeader from './PageHeader';
-import ServiceTableData from './ServiceTableData';
+import ServiceList from './ServiceList';
 
 const ExampleToast = ({ children } : {children : any}) => {
   const [show, toggleShow] = useState(true);
@@ -34,27 +34,30 @@ const App = () => {
   }
   let width = root?.clientWidth || 500;
   let height = root?.clientHeight || 600;
-  let mapWidth = (width/2) * 0.9;
+  let mapWidth = (width/1.5);
   let mapHeight = height * 0.9;
 
+  let renderState = () => {
+    return Pages[state];
+  }
+
+  let Pages = [
+    <MapView width={mapWidth} height={mapHeight} onClick={pageTwo} />,
+    <ServiceList />,
+  ]
+
+  function pageTwo(county_key: string) {
+    console.log(county_key);
+    setState(1)
+  }
+
+  let [state, setState] = useState(0)
+
   return (
-  <div className="container-fluid h-100 w-100">
+  <div className="h-100 w-100">
     <PageHeader />
     <div className="row w-100 justify-content-center">
-      <div className="col-md-3 p-0">
-        hello
-      </div>
-      <div className="col-md-6 p-0">
-        <MapView width={mapWidth} height={mapHeight} />
-      </div>
-      <div className="col-md-3 p-0">
-        world
-      </div>
-    </div>
-    <div className="row">
-        <ul className="list-unstyled">
-          <ServiceTableData />
-        </ul>
+        { renderState() }
     </div>
   </div>
   );

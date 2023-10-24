@@ -1,6 +1,7 @@
 import * as React from "react";
 import Canvas from "./Canvas";
 import County from "./County";
+import ServiceCategoryPopup from "./ServiceCategoryPopup";
 
 let county_svgs = [
   <path d="M 549.16 223.67 566.5 223.17 565.25 170.85 590.81 170.41 604.9 169.85 606.24 204.64 607.32 239.48 587.15 240.12 549.76 240.93 549.16 223.67 Z" id="Wells" fill="#b3c4db"/>,
@@ -136,9 +137,13 @@ let county_svgs = [
 
 interface MapViewProps {
   width: number,
-  height: number
+  height: number,
+  onClick: Function
 };
 
 export const MapView = (props: MapViewProps) => {
-  return <Canvas canvasWidth={props.width} canvasHeight={props.height} counties={counties}/>
+  return <div style={{width: props.width}}>
+    <Canvas canvasWidth={props.width} canvasHeight={props.height} counties={counties} onClick={props.onClick}/>
+    <ServiceCategoryPopup />
+  </div>
 }

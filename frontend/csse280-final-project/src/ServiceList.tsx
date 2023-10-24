@@ -1,10 +1,7 @@
 import * as React from 'react';
 import './ServiceTableData.css'
 
-/* type ServiceTableDataProps =  */
-
-
-const ServiceTableData = () => {
+const ServiceListItem = () => {
     return (
         <>
             <li className="p-4 m-6">
@@ -32,4 +29,10 @@ const ServiceTableData = () => {
     );
 };
 
-export default ServiceTableData;
+const ServiceList = () => {
+    return <ul className='list-unstyled'>
+        <ServiceListItem />
+        <ServiceListItem />
+    </ul>
+}
+export default ServiceList;
