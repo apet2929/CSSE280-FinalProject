@@ -48,6 +48,7 @@ export default function Canvas(props: CanvasProps) {
   const isResetRef = useRef<boolean>(false);
   const lastMousePosRef = useRef<Point>(ORIGIN);
   const lastOffsetRef = useRef<Point>(ORIGIN);
+  
   // update last offset
   useEffect(() => {
     lastOffsetRef.current = offset;
@@ -255,10 +256,9 @@ export default function Canvas(props: CanvasProps) {
         onMouseDown={startPan}
         onClick={onClick}
         ref={canvasRef}
+        className="border border-dark"
         width={props.canvasWidth * ratio}
-        className="h-100"
         style={{
-          border: "2px solid #000",
           width: `${props.canvasWidth}px`,
           height: `${props.canvasHeight}px`
         }}

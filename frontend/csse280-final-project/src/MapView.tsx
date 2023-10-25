@@ -138,12 +138,15 @@ let county_svgs = [
 interface MapViewProps {
   width: number,
   height: number,
-  onClick: Function
+  onCountyClick: Function,
+  onCategoryClick: Function
 };
 
 export const MapView = (props: MapViewProps) => {
-  return <div style={{width: props.width}}>
-    <Canvas canvasWidth={props.width} canvasHeight={props.height} counties={counties} onClick={props.onClick}/>
-    <ServiceCategoryPopup />
+  console.log(props);
+  
+  return <div style={{width: "100%"}}>
+    <Canvas canvasWidth={props.width} canvasHeight={props.height} counties={counties} onClick={props.onCountyClick}/>
+    <ServiceCategoryPopup onClick={props.onCategoryClick}/>
   </div>
 }

@@ -1,5 +1,14 @@
 #root {
-  overflow-y: hidden;
+    /* clip: rect(auto, auto, auto, auto); */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #FFEEDB;
+    padding: 0;
+}
+
+* {
+  overflow: hidden;
 }
 
 #header {
@@ -42,6 +51,7 @@
 canvas {
   display: block;
   margin: auto;
+  margin-top: 45px;
 }
 
 .category {
@@ -49,4 +59,32 @@ canvas {
   border-radius: 50%;
   border: 10px solid rgb(205, 209, 215);
   padding: 30px;
+}
+
+#serviceCategoryPopup {
+    position: absolute;
+    bottom: -50%;
+    /* width: 5%; */
+    background-color: #3b5598;
+    display: block;
+    
+}
+
+@keyframes bar
+{
+  0% {
+    bottom: -50%;
+  }
+  100% {
+    bottom: 0%;
+  }
+}
+
+.popup {
+  -webkit-animation: bar 2s linear;
+  animation: bar 2s linear;
+}
+
+.popped {
+  bottom: 0% !important;
 }

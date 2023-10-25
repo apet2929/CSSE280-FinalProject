@@ -27,35 +27,52 @@ const ExampleToast = ({ children } : {children : any}) => {
 
 const App = () => {
   let root = document.getElementById('root')
-  if(root) {
-    root.style.height = "100vh";
-    root.style.background = "#FFEEDB"
-    root.style.padding = "0";
-  }
-  let width = root?.clientWidth || 500;
-  let height = root?.clientHeight || 600;
+
+  let width = window.screen.width;
+  let height = window.screen.height;
   let mapWidth = (width/1.5);
-  let mapHeight = height * 0.9;
+  let mapHeight = height - 45;
 
   let renderState = () => {
     return Pages[state];
   }
 
   let Pages = [
-    <MapView width={mapWidth} height={mapHeight} onClick={pageTwo} />,
+    <MapView width={mapWidth} height={mapHeight} onCountyClick={pageTwo} onCategoryClick={pageThree} />,
     <ServiceList />,
   ]
 
+  let popup = document.getElementById("serviceCategoryPopup")
+  let handler = function() {
+    console.log("Removing event listener and popup class");
+    popup?.classList.remove("popup")
+    popup?.classList.add("popped")
+  };
+  
+
+  function pageOne() {
+    setState(0)
+  }
+
   function pageTwo(county_key: string) {
+    console.log("Page two");
     console.log(county_key);
-    setState(1)
+    setCounty(county_key);
+    popup?.classList.add("popup")
+    popup?.addEventListener("animationend", handler, false)
+  }
+
+  function pageThree(category_key: string) {
+      // do api call
+      setState(1)
   }
 
   let [state, setState] = useState(0)
+  let [county, setCounty] = useState("")
 
   return (
   <div className="h-100 w-100">
-    <PageHeader onLogoClick={() => setState(0)}/>
+    <PageHeader onLogoClick={() => pageOne()}/>
     <div className="row w-100 justify-content-center">
         { renderState() }
     </div>
