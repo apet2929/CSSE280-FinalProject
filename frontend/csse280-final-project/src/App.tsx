@@ -37,11 +37,6 @@ const App = () => {
     return Pages[state];
   }
 
-  let Pages = [
-    <MapView width={mapWidth} height={mapHeight} onCountyClick={pageTwo} onCategoryClick={pageThree} />,
-    <ServiceList />,
-  ]
-
   let popup = document.getElementById("serviceCategoryPopup")
   let handler = function() {
     console.log("Removing event listener and popup class");
@@ -52,10 +47,16 @@ const App = () => {
 
   function pageOne() {
     setState(0)
+    popup?.classList.remove("popped")
+    popup?.classList.remove("popup")
+    popup?.removeEventListener("animationend", handler, false)
   }
 
   function pageTwo(county_key: string) {
     console.log("Page two");
+    popup = document.getElementById("serviceCategoryPopup")
+    console.log(popup);
+    
     console.log(county_key);
     setCounty(county_key);
     popup?.classList.add("popup")
@@ -69,6 +70,11 @@ const App = () => {
 
   let [state, setState] = useState(0)
   let [county, setCounty] = useState("")
+
+  let Pages = [
+    <MapView width={mapWidth} height={mapHeight} onCountyClick={pageTwo} onCategoryClick={pageThree} countyName={county} />,
+    <ServiceList />,
+  ]
 
   return (
   <div className="h-100 w-100">

@@ -13,13 +13,14 @@ let Category = (props: CategoryProps) => {
 
 type PopupProps = {
     onClick: Function;
+    countyName: string;
 }
 
 let ServiceCategoryPopup = (props: PopupProps) => {
     return <div id="serviceCategoryPopup" className="container">
         <div className="card">
             <div className="card-header">
-            Choose from the categories below and browse local programs
+            Choose from the categories below and browse programs local to {props.countyName}
             </div>
             <div className="card-body container">
                 <div className="row">

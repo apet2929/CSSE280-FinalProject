@@ -140,6 +140,7 @@ interface MapViewProps {
   height: number,
   onCountyClick: Function,
   onCategoryClick: Function
+  countyName: string
 };
 
 export const MapView = (props: MapViewProps) => {
@@ -147,6 +148,6 @@ export const MapView = (props: MapViewProps) => {
   
   return <div style={{width: "100%"}}>
     <Canvas canvasWidth={props.width} canvasHeight={props.height} counties={counties} onClick={props.onCountyClick}/>
-    <ServiceCategoryPopup onClick={props.onCategoryClick}/>
+    <ServiceCategoryPopup onClick={props.onCategoryClick} countyName={props.countyName}/>
   </div>
 }
