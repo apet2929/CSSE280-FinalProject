@@ -1,16 +1,34 @@
 #header {
-  width: 75%;
+  width: 100%;
   height: 45px;
-  border-radius: 30px;
+  border-radius: 0px;
   left: 0; 
   right: 0; 
-  top: 30px;
-  text-align: center;
+  top: 0px;
+  text-align: left;
 
   color: #FFEEDB;
   margin-left: auto; 
   margin-right: auto; 
   background-color: #42033D;
+}
+
+#navlogo {
+  width: 73px;
+  height: 40px;
+  margin-top: 4px;
+  margin-left: 5px;
+}
+
+#searchbar {
+  margin-top: 7px;
+  margin-left: 4px;
+  height: 30px;
+  width: 80%;
+}
+
+#searchbutton {
+  height: 30px;
 }
 
 #header > h3 {
