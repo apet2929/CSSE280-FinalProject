@@ -55,7 +55,7 @@ const App = () => {
 
   return (
   <div className="h-100 w-100">
-    <PageHeader />
+    <PageHeader onLogoClick={() => setState(0)}/>
     <div className="row w-100 justify-content-center">
         { renderState() }
     </div>
