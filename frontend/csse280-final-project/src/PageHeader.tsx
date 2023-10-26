@@ -3,15 +3,15 @@ type HeaderProps = {
 }
 
 const PageHeader = (props: HeaderProps) => (
-    <div id="header" className="position-absolute">
-        {/* <h3 className='align-middle'>Hello World</h3> */}
-      <img src="https://in211.communityos.org/publicassets/logo.png" id="navlogo" onClick={(e) => props.onLogoClick()}/>
-      {/* <input type="search" className="w-75 mx-4" placeholder="Search for a Service"/> */}
-      <div className="input-group mb-3 w-75 d-inline">
-        <input type="search" id="searchbar" className="form-control d-inline" placeholder="Search for a Service" aria-label="Search for a service" aria-describedby="searchbutton" />
-        <button className="btn btn-outline-primary" type="button" id="searchbutton">Search</button>
-      </div>
-    </div>
+  <nav id="header" className="navbar py-0">
+    <div className="container mx-0 px-0 justify-content-start">
+      <img src="https://in211.communityos.org/publicassets/logo.png" id="navlogo" className="navbar-brand mx-2 py-0" onClick={(e) => props.onLogoClick()}/>
+        <form className="d-flex mx-4 w-auto" role="search">
+          <input className="form-control me-4" type="search" placeholder="Search" aria-label="Search" />
+          <button className="btn btn-primary" id="searchbutton" type="submit">Search</button>
+        </form>
+   </div>
+  </nav>
 )
 
 export default PageHeader;

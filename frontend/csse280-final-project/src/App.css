@@ -13,7 +13,7 @@
 
 #header {
   width: 100%;
-  height: 45px;
+  height: 55px;
   border-radius: 0px;
   left: 0; 
   right: 0; 
@@ -29,19 +29,20 @@
 #navlogo {
   width: 73px;
   height: 40px;
-  margin-top: 4px;
-  margin-left: 5px;
+  /* margin-top: 4px; */
+  /* margin-left: 5px; */
+  /* margin-right: 5px; */
 }
 
 #searchbar {
-  margin-top: 7px;
-  margin-left: 4px;
-  height: 30px;
+  /* margin-top: 3px; */
+  /* margin-left: 4px; */
+  /* height: 30px; */
   width: 80%;
 }
 
 #searchbutton {
-  height: 30px;
+  width: 95px;
 }
 
 #header > h3 {

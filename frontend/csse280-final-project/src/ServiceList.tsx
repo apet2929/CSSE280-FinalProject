@@ -4,24 +4,17 @@ import './ServiceTableData.css'
 const ServiceListItem = () => {
     return (
         <>
-            <li className="p-4 m-6">
-                <div className="inner px-4">
-                    <div className="navbar">
-                        <div className="navbar-brand">
-                            <img className="mx-2" width="40" height="25" src="https://in211.communityos.org/publicassets/logo.png" alt="" />
-                            <p className="catagory align-middle">Catagory</p>
+            <li className="card my-3 mx-3">
+                <div className="row g-0">
+                    <div className="col-md-8">
+                        <div className="card-body">
+                            <p className="card-text"><small className="text-body-secondary">Service Catagory</small></p>
+                            <h5 className="card-title">Service Name</h5>
+                            <p className="card-text">Service Description</p>
                         </div>
                     </div>
-                    <div className="row py-2">
-                        <div className="col">
-                            <h5>Service Name</h5>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini.
-                        </div>
-                        <div className="col">
-                            <h5>
-                                Service IMG
-                            </h5>
-                        </div>
+                    <div className="col-md-4">
+                        <img className="img-fluid rounded-start" src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png" />
                     </div>
                 </div>
             </li>
@@ -36,3 +29,4 @@ const ServiceList = () => {
     </ul>
 }
 export default ServiceList;
+                                                                                                                                                        
