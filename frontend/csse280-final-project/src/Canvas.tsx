@@ -20,6 +20,7 @@ type Point = {
   y: number;
 };
 const ORIGIN = Object.freeze({ x: 0, y: 0 });
+const DIST_UNTIL_PAN = 10;
 
 // adjust to device to avoid blur
 const { devicePixelRatio: ratio = 1 } = window;
@@ -48,6 +49,7 @@ export default function Canvas(props: CanvasProps) {
   const isResetRef = useRef<boolean>(false);
   const lastMousePosRef = useRef<Point>(ORIGIN);
   const lastOffsetRef = useRef<Point>(ORIGIN);
+  const startPanPoint = useRef<Point>(ORIGIN);
   
   // update last offset
   useEffect(() => {
@@ -60,21 +62,9 @@ export default function Canvas(props: CanvasProps) {
       scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for y
   
     return {
-      x: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
-      y: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+      x: (evt.x - rect.left) * scaleX,   // scale mouse coordinates after they have
+      y: (evt.y - rect.top) * scaleY     // been adjusted to be relative to element
     }
-  }
-
-  const onClick = (e: any) => {
-    let pos = getMousePos(canvasRef.current, e); // get adjusted coordinates as above
-    for(const [key, county] of props.counties) {
-    
-      if(context != null && context.isPointInPath(county.path, pos.x, pos.y)) {
-        console.log(key);
-        county.onClick(key, e);
-        props.onClick(key)
-      }
-    }    
   }
 
   // reset
@@ -117,9 +107,26 @@ export default function Canvas(props: CanvasProps) {
     [context]
   );
 
+  const onClick = () => {
+    const diff = diffPoints(startPanPoint.current, lastMousePosRef.current);
+    if(Math.abs(diff.x) < DIST_UNTIL_PAN || Math.abs(diff.y) < DIST_UNTIL_PAN) {
+      let pos = getMousePos(canvasRef.current, lastMousePosRef.current);
+      for(const [key, county] of props.counties) {
+        if(context != null && context.isPointInPath(county.path, pos.x, pos.y)) {
+          console.log(key);
+          county.onClick(key);
+          props.onClick(key)
+        }
+      } 
+    }
+  }
+
   const mouseUp = useCallback(() => {
     document.removeEventListener("mousemove", mouseMove);
     document.removeEventListener("mouseup", mouseUp);
+    onClick()
+    
+
   }, [mouseMove]);
 
   const startPan = useCallback(
@@ -127,6 +134,7 @@ export default function Canvas(props: CanvasProps) {
       document.addEventListener("mousemove", mouseMove);
       document.addEventListener("mouseup", mouseUp);
       lastMousePosRef.current = { x: event.pageX, y: event.pageY };
+      startPanPoint.current = { x: event.pageX, y: event.pageY };
     },
     [mouseMove, mouseUp]
   );
@@ -254,7 +262,6 @@ export default function Canvas(props: CanvasProps) {
       <canvas
         id="canvas"
         onMouseDown={startPan}
-        onClick={onClick}
         ref={canvasRef}
         className="border border-dark"
         width={props.canvasWidth * ratio}

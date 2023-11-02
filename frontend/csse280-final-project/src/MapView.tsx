@@ -116,11 +116,9 @@ let county_svgs = [
   county_svgs.forEach((svg_elem) => {
     let id = svg_elem.props.id as string | null;
     
-    let onClick = (county_id: string, e: Event) => {
-      console.log(e);
+    let onClick = (county_id: string) => {
       let county = counties.get(county_id)
-      console.log(county);
-      
+      console.log(county); 
     }
 
     if(id != null){
