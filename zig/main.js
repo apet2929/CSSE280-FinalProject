@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json())
 
 function titleCase(str){
    str = str.toLowerCase().split(' ');
@@ -10,8 +11,8 @@ function titleCase(str){
   return final.join(' ')
 }
 
-app.get('/:county/:catagory', async (req, res) => {
-    const { county, catagory } = req.params;
+app.get('/:county/', async (req, res) => {
+    const { county } = req.params;
     const countyListRes = await fetch('https://in211.scanurag.com/countyList.json');
     const countyList = await countyListRes.json();
     const desiredCounty = countyList[titleCase(county) + " County"];

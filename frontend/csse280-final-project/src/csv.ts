@@ -1,9 +1,6 @@
-// import * as fs from 'fs';
-const fs = require('fs');
-// import * as path from 'path';
-const path = require('path');
-// import { parse } from 'csv-parse';
-const csv = require('csv-parse');
+// const path = require('path');
+import { CsvError, parse } from 'csv-parse';
+// const csv = require('csv-parse');
 
 type Service = {
     idService: string,
@@ -83,86 +80,15 @@ type Site = {
     accessibility: string
 };
 
-function parseService() {
-    const csvFilePath = path.resolve(__dirname, "../data/Sample Services.csv");
-    const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
-    csv.parse(fileContent, {
-        delimiter: ',',
-        columns: true,
-    }, (error, result: Service) => {
-        if (error) {
-            console.error(error);
-        }
-        console.log(result);
-    });
+async function getData(county: String) {
+    let response = await fetch(`https://in211.scanurag.com/countyList.json`)
+    console.log(response);
+    if(response.statusText === "success") {
+        return "Yee"
+    } else {
+        return response.json()
+    }
 }
 
-function parseAddress() {
-    const csvFilePath = path.resolve(__dirname, "../data/Sample Address.csv");
-    const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
-    csv.parse(fileContent, {
-        delimiter: ',',
-        columns: true,
-    }, (error, result: Address) => {
-        if (error) {
-            console.error(error);
-        }
-        console.log(result);
-    });
-}
 
-function parseAgency() {
-    const csvFilePath = path.resolve(__dirname, "../data/Sample Agencies.csv");
-    const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
-    csv.parse(fileContent, {
-        delimiter: ',',
-        columns: true,
-    }, (error, result: Agency) => {
-        if (error) {
-            console.error(error);
-        }
-        console.log(result);
-    });
-}
-
-function parseTaxonomy() {
-    const csvFilePath = path.resolve(__dirname, "../data/Sample Taxonomies.csv");
-    const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
-    csv.parse(fileContent, {
-        delimiter: ',',
-        columns: true,
-    }, (error, result: Taxonomy) => {
-        if (error) {
-            console.error(error);
-        }
-        console.log(result);
-    });
-}
-
-function parsePhone() {
-    const csvFilePath = path.resolve(__dirname, "../data/Sample Phone Number.csv");
-    const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
-    csv.parse(fileContent, {
-        delimiter: ',',
-        columns: true,
-    }, (error, result: Phone) => {
-        if (error) {
-            console.error(error);
-        }
-        console.log(result);
-    });
-}
-
-function parseSite() {
-    const csvFilePath = path.resolve(__dirname, "../data/Sample Sites.csv");
-    const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
-    csv.parse(fileContent, {
-        delimiter: ',',
-        columns: true,
-    }, (error, result: Site) => {
-        if (error) {
-            console.error(error);
-        }
-        console.log(result);
-    });
-}
+export { getData };

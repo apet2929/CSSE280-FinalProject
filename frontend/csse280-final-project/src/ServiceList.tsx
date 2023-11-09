@@ -22,11 +22,43 @@ const ServiceListItem = () => {
     );
 };
 
-const ServiceList = () => {
-    return <ul className='list-unstyled'>
-        <ServiceListItem />
-        <ServiceListItem />
-    </ul>
+let getData = async (county: String) => {
+    let response = await fetch(`/${county}`)
+    console.log(response);
+    return await response.json()
 }
+
+type ServiceListProps = {}
+class ServiceList extends React.Component {
+    constructor(props: ServiceListProps){
+        super(props)
+        this.state = {
+            services: []
+        }
+    }
+
+    componentDidMount(): void {
+        getData("Lake").then((services) => {
+            console.log(services);
+            
+            this.setState({
+                services: services
+            })
+        })
+    }
+
+    render(): React.ReactNode {
+        return <ul className='list-unstyled'>
+                    Hello world
+                </ul>
+    }
+}
+
+// const ServiceList = () => {
+//     return <ul className='list-unstyled'>
+//         <ServiceListItem />
+//         <ServiceListItem />
+//     </ul>
+// }
 export default ServiceList;
                                                                                                                                                         
