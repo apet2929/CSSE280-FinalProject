@@ -3,7 +3,7 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background-color: #FFEEDB;
+    background-color: #FFFFFF;
     padding: 0;
 }
 
@@ -20,10 +20,10 @@
   top: 0px;
   text-align: left;
 
-  color: #FFEEDB;
+  color: #FFFFFF;
   margin-left: auto; 
   margin-right: auto; 
-  background-color: #42033D;
+  background-color: #005191;
 }
 
 #navlogo {
@@ -65,10 +65,8 @@ canvas {
 #serviceCategoryPopup {
     position: absolute;
     bottom: -50%;
-    /* width: 5%; */
-    background-color: #3b5598;
+    background-color: #005191;
     display: block;
-    
 }
 
 @keyframes bar
