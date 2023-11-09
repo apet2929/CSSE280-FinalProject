@@ -9,6 +9,7 @@ import { MapView } from './MapView';
 import PageHeader from './PageHeader';
 import ServiceList from './ServiceList';
 import axios from 'axios';
+import { Service } from './csv'
 
 
 const ExampleToast = ({ children } : {children : any}) => {
@@ -28,12 +29,9 @@ const ExampleToast = ({ children } : {children : any}) => {
 };
 
 
-//data will be the string we send from our server
-const apiCall = () => {
-  axios.get('http://localhost:8080').then((data) => {
-    //this console.log will be in our frontend console
-    console.log(data)
-  })
+const getServicesByCounty = async (county: String) => {
+  const data = await axios.get(`http://localhost:8080/${county}`);
+  return JSON.parse(data.data);
 }
 
 const App = () => {
@@ -76,7 +74,14 @@ const App = () => {
 
   function pageThree(category_key: string) {
       // do api call
+      getServicesByCounty(county).then((data) => {
+        console.log(data);
+        data = data.filter((service: Service) => {
+          return service.taxonomy_category == category_key
+        })
+      })
       setState(1)
+
   }
 
   let [state, setState] = useState(0)
@@ -86,8 +91,6 @@ const App = () => {
     <MapView width={mapWidth} height={mapHeight} onCountyClick={pageTwo} onCategoryClick={pageThree} countyName={county} />,
     <ServiceList />,
   ]
-
-  apiCall()
 
   return (
   <div className="h-100 w-100">
