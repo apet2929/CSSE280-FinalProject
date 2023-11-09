@@ -180,10 +180,6 @@ export default function Canvas(props: CanvasProps) {
         context.fill(path);
         context.stroke(path);
       }
-
-      context.arc(viewportTopLeft.x, viewportTopLeft.y, 5, 0, 2 * Math.PI);
-      context.fillStyle = "red";
-      context.fill();
     }
   }, [
     props.canvasWidth,

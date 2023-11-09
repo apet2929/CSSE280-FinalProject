@@ -8,6 +8,8 @@ import './App.css';
 import { MapView } from './MapView';
 import PageHeader from './PageHeader';
 import ServiceList from './ServiceList';
+import axios from 'axios';
+
 
 const ExampleToast = ({ children } : {children : any}) => {
   const [show, toggleShow] = useState(true);
@@ -24,6 +26,15 @@ const ExampleToast = ({ children } : {children : any}) => {
     </>
   );
 };
+
+
+//data will be the string we send from our server
+const apiCall = () => {
+  axios.get('http://localhost:8080').then((data) => {
+    //this console.log will be in our frontend console
+    console.log(data)
+  })
+}
 
 const App = () => {
   let root = document.getElementById('root')
@@ -75,6 +86,8 @@ const App = () => {
     <MapView width={mapWidth} height={mapHeight} onCountyClick={pageTwo} onCategoryClick={pageThree} countyName={county} />,
     <ServiceList />,
   ]
+
+  apiCall()
 
   return (
   <div className="h-100 w-100">
