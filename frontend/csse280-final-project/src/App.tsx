@@ -57,24 +57,22 @@ const App = () => {
 
   function pageTwo(county_key: string) {
     console.log("Page two");
+    console.log(county_key);
+    setCounty(county_key);
     setModalShow(true)
-    // popup = document.getElementById("serviceCategoryPopup")
-    // console.log(popup);
     
-    // console.log(county_key);
-    // setCounty(county_key);
-    // popup?.classList.add("popup")
-    // popup?.addEventListener("animationend", handler, false)
   }
 
   function pageThree(category_key: string) {
       // do api call
+      
       if(services.length == 0) {
         getServicesByCounty(county).then((data: Service[]) => {
           console.log(data);
           setServices(data)
         })
       }
+      setModalShow(false)
       setCategory(category_key)
       setState(1)
   }
@@ -83,7 +81,7 @@ const App = () => {
     <MapView width={mapWidth} height={mapHeight} onCountyClick={pageTwo} onCategoryClick={pageThree} countyName={county} />,
     <ServiceList services={services} category={category} county={county} />,
   ]
-  
+
   let handleClose = (showVal: boolean) => {
     console.log(showVal);
     console.log("Lol")  
@@ -96,7 +94,7 @@ const App = () => {
     <div className="row w-100 justify-content-center">
         { renderState() }
     </div>
-    <ServiceCategoryPopup show={modalShow} setShow={handleClose} />
+    <ServiceCategoryPopup show={modalShow} setShow={handleClose} onClick={pageThree} countyName={county} />
   </div>
   );
 }

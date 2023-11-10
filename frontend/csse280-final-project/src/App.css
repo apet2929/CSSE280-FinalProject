@@ -73,26 +73,14 @@ canvas {
   #canvas {
     margin: 0;
   }
+
+  #searchbutton {
+    display: none;
+  }
+  
 } 
 
-@keyframes bar
-{
-  0% {
-    bottom: -50%;
-  }
-  100% {
-    bottom: 0%;
-  }
-}
 
-.popup {
-  -webkit-animation: bar 2s linear;
-  animation: bar 2s linear;
-}
-
-.popped {
-  bottom: 0% !important;
-}
 
 @media print {
   * {
