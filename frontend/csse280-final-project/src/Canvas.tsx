@@ -19,7 +19,7 @@ type Point = {
   x: number;
   y: number;
 };
-const ORIGIN = Object.freeze({ x: 0, y: 0 });
+const ORIGIN = Object.freeze({ x: 0, y: 1000 });
 const DIST_UNTIL_PAN = 10;
 
 // adjust to device to avoid blur

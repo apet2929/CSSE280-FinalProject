@@ -1,16 +1,23 @@
 import * as React from 'react';
 import './ServiceTableData.css'
+import { Service } from './csv';
 
-const ServiceListItem = () => {
+
+type ServiceItemProps = {
+    service: Service
+}
+
+const ServiceListItem = (props: ServiceItemProps) => {
+    let s = props.service
     return (
         <>
             <li className="card my-3 mx-3">
                 <div className="row g-0">
                     <div className="col-md-8">
                         <div className="card-body">
-                            <p className="card-text"><small className="text-body-secondary">Service Catagory</small></p>
-                            <h5 className="card-title">Service Name</h5>
-                            <p className="card-text">Service Description</p>
+                            <p className="card-text"><small className="text-body-secondary">{s.taxonomy_category}</small></p>
+                            <h5 className="card-title">{s.agency_name}</h5>
+                            <p className="card-text">{s.agency_desc}</p>
                         </div>
                     </div>
                     <div className="col-md-4">
@@ -22,36 +29,57 @@ const ServiceListItem = () => {
     );
 };
 
-let getData = async (county: String) => {
-    let response = await fetch(`/${county}`)
-    console.log(response);
-    return await response.json()
+const ServiceTableItem = (props: ServiceItemProps) => {
+    let s = props.service
+    let address = `${s.address_1} ${s.address_2} ${s.city} ${s.zipcode}`
+    let categoryString = Array.from(s.taxonomy_category).reduce((prev, current, index) => {
+        return prev + ", " + current
+    })
+    return (
+        <div className="row border-top">
+            <div className="col-2">{s.service_name}</div>
+            <div className="col-2">{categoryString}</div>
+            <div className="col-3" style={{fontSizeAdjust: "0.3"}}>{s.service_description}</div>
+            <div className="col-2">{address}</div>
+            <div className="col-1">{s.site_number}</div>
+            <div className="col-2" style={{pageBreakAfter: "always"}}>{s.service_website}</div>
+        </div>
+    );
+};
+
+type ServiceListProps = {
+    services: Service[]
+    category: string
+    county: string
 }
 
-type ServiceListProps = {}
-class ServiceList extends React.Component {
-    constructor(props: ServiceListProps){
-        super(props)
-        this.state = {
-            services: []
-        }
-    }
-
-    componentDidMount(): void {
-        getData("Lake").then((services) => {
-            console.log(services);
-            
-            this.setState({
-                services: services
-            })
+export const ServiceList = (props: ServiceListProps) => {
+    let filteredServices = props.services
+        .filter((service: Service) => props.category === "" || service.taxonomy_category.includes(props.category))
+    let serviceItems = filteredServices
+        .map((service: Service) =>  {
+            return <ServiceListItem service={service} /> 
         })
-    }
+    let serviceTableItems = filteredServices
+        .map((service) => {
+            return <ServiceTableItem service={service} />
+        })
+    console.log(props.services[0]);
 
-    render(): React.ReactNode {
-        return <ul className='list-unstyled'>
-                    Hello world
-                </ul>
-    }
+    return <div className='p-5 overflow-scroll' style={{height: "100vh"}}>
+        <h3>Services for {props.category} in {props.county} </h3>
+            <section id="serviceTable" className='container'>
+                <div className="row">
+                    <div className="col-2 h4">Name</div>
+                    <div className="col-2 h4">Categories</div>
+                    <div className="col-3 h4">Description</div>
+                    <div className="col-2 h4">Address</div>
+                    <div className="col-1">Phone Number</div>
+                    <div className="col-2 h4">Website</div>
+                </div>
+                { serviceTableItems }
+            </section>
+    </div>
 }
 
 // const ServiceList = () => {

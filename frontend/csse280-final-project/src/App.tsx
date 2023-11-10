@@ -12,35 +12,28 @@ import axios from 'axios';
 import { Service } from './csv'
 
 
-const ExampleToast = ({ children } : {children : any}) => {
-  const [show, toggleShow] = useState(true);
-
-  return (
-    <>
-      {!show && <Button onClick={() => toggleShow(true)}>Show Toast</Button>}
-      <Toast show={show} onClose={() => toggleShow(false)}>
-        <Toast.Header>
-          <strong className="mr-auto">React-Bootstrap</strong>
-        </Toast.Header>
-        <Toast.Body>{children}</Toast.Body>
-      </Toast>
-    </>
-  );
-};
-
-
 const getServicesByCounty = async (county: String) => {
-  const data = await axios.get(`http://localhost:8080/${county}`);
-  return JSON.parse(data.data);
+  const response = await axios.get(`http://localhost:8080/${county}`);
+  return response.data;
 }
 
 const App = () => {
   let root = document.getElementById('root')
 
+  let [state, setState] = useState(0)
+  let [county, setCounty] = useState("")
+  let initialState: Service[] = []
+  let [services, setServices] = useState(initialState)
+  let [category, setCategory] = useState("")
+
   let width = window.screen.width;
   let height = window.screen.height;
   let mapWidth = (width/1.5);
   let mapHeight = height - 45;
+  if(width < 800) {
+    mapWidth = width
+  }
+
 
   let renderState = () => {
     return Pages[state];
@@ -53,7 +46,6 @@ const App = () => {
     popup?.classList.add("popped")
   };
   
-
   function pageOne() {
     setState(0)
     popup?.classList.remove("popped")
@@ -74,22 +66,19 @@ const App = () => {
 
   function pageThree(category_key: string) {
       // do api call
-      getServicesByCounty(county).then((data) => {
-        console.log(data);
-        data = data.filter((service: Service) => {
-          return service.taxonomy_category == category_key
+      if(services.length == 0) {
+        getServicesByCounty(county).then((data: Service[]) => {
+          console.log(data);
+          setServices(data)
         })
-      })
+      }
+      setCategory(category_key)
       setState(1)
-
   }
-
-  let [state, setState] = useState(0)
-  let [county, setCounty] = useState("")
 
   let Pages = [
     <MapView width={mapWidth} height={mapHeight} onCountyClick={pageTwo} onCategoryClick={pageThree} countyName={county} />,
-    <ServiceList />,
+    <ServiceList services={services} category={category} county={county} />,
   ]
 
   return (

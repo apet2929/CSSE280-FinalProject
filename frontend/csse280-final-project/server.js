@@ -19,7 +19,7 @@ function titleCase(str){
    return final.join(' ')
  }
  
- app.get('/:county/', async (req, res) => {
+ app.get('/:county', async (req, res) => {
      const { county } = req.params;
      const countyListRes = await fetch('https://in211.scanurag.com/countyList.json');
      const countyList = await countyListRes.json();

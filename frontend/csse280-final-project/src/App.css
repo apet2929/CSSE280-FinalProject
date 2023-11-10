@@ -69,6 +69,12 @@ canvas {
     display: block;
 }
 
+@media only screen and (max-width: 700px) {
+  #canvas {
+    margin: 0;
+  }
+} 
+
 @keyframes bar
 {
   0% {
@@ -86,4 +92,18 @@ canvas {
 
 .popped {
   bottom: 0% !important;
+}
+
+@media print {
+  * {
+    font-size: small;
+  }
+
+  #header {
+    display: none;
+  }
+  * {
+    word-wrap: anywhere;
+  }
+
 }
