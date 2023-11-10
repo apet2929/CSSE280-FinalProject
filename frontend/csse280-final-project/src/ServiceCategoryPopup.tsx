@@ -1,4 +1,5 @@
 import {FaStar} from "react-icons/fa"
+import {Modal, Button} from 'react-bootstrap'
 
 type CategoryProps = {
     name: string;
@@ -12,13 +13,10 @@ let Category = (props: CategoryProps) => {
     return <button type="button" className="btn btn-primary mx-4 my-2" onClick={(e) => props.onClick(props.name)}>{ props.name }</button>
 }
 
-type PopupProps = {
-    onClick: Function;
-    countyName: string;
-}
 
-let ServiceCategoryPopup = (props: PopupProps) => {
-    return <div id="serviceCategoryPopup" className="container p-0">
+
+/*
+<div id="serviceCategoryPopup" className="container p-0">
         <div className="card categoryCard">
             <div className="card-header">
             Choose from the categories below and browse programs local to {props.countyName}
@@ -37,6 +35,38 @@ let ServiceCategoryPopup = (props: PopupProps) => {
             </div>
         </div>
     </div>
+*/
+type PopupProps = {
+    show: boolean;
+    setShow: Function;
 }
+function ServiceCategoryPopup(props: PopupProps) {
+
+    const handleClose = () => props.setShow(false);
+    const handleShow = () => props.setShow(true);
+  
+    return (
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          Launch demo modal
+        </Button>
+  
+        <Modal show={props.show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
 
 export default ServiceCategoryPopup

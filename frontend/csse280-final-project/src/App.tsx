@@ -10,6 +10,7 @@ import PageHeader from './PageHeader';
 import ServiceList from './ServiceList';
 import axios from 'axios';
 import { Service } from './csv'
+import ServiceCategoryPopup from './ServiceCategoryPopup';
 
 
 const getServicesByCounty = async (county: String) => {
@@ -20,6 +21,7 @@ const getServicesByCounty = async (county: String) => {
 const App = () => {
   let root = document.getElementById('root')
 
+  let [modalShow, setModalShow] = useState(false)
   let [state, setState] = useState(0)
   let [county, setCounty] = useState("")
   let initialState: Service[] = []
@@ -55,13 +57,14 @@ const App = () => {
 
   function pageTwo(county_key: string) {
     console.log("Page two");
-    popup = document.getElementById("serviceCategoryPopup")
-    console.log(popup);
+    setModalShow(true)
+    // popup = document.getElementById("serviceCategoryPopup")
+    // console.log(popup);
     
-    console.log(county_key);
-    setCounty(county_key);
-    popup?.classList.add("popup")
-    popup?.addEventListener("animationend", handler, false)
+    // console.log(county_key);
+    // setCounty(county_key);
+    // popup?.classList.add("popup")
+    // popup?.addEventListener("animationend", handler, false)
   }
 
   function pageThree(category_key: string) {
@@ -80,6 +83,12 @@ const App = () => {
     <MapView width={mapWidth} height={mapHeight} onCountyClick={pageTwo} onCategoryClick={pageThree} countyName={county} />,
     <ServiceList services={services} category={category} county={county} />,
   ]
+  
+  let handleClose = (showVal: boolean) => {
+    console.log(showVal);
+    console.log("Lol")  
+    setModalShow(showVal)    
+  }
 
   return (
   <div className="h-100 w-100">
@@ -87,6 +96,7 @@ const App = () => {
     <div className="row w-100 justify-content-center">
         { renderState() }
     </div>
+    <ServiceCategoryPopup show={modalShow} setShow={handleClose} />
   </div>
   );
 }

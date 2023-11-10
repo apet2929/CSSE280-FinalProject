@@ -146,6 +146,5 @@ export const MapView = (props: MapViewProps) => {
   
   return <div style={{width: "100%"}}>
     <Canvas canvasWidth={props.width} canvasHeight={props.height} counties={counties} onClick={props.onCountyClick}/>
-    <ServiceCategoryPopup onClick={props.onCategoryClick} countyName={props.countyName}/>
   </div>
 }

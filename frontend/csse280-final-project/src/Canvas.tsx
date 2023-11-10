@@ -20,7 +20,7 @@ type Point = {
   y: number;
 };
 const ORIGIN = Object.freeze({ x: 0, y: 1000 });
-const DIST_UNTIL_PAN = 10;
+const DIST_UNTIL_PAN = 2;
 
 // adjust to device to avoid blur
 const { devicePixelRatio: ratio = 1 } = window;
