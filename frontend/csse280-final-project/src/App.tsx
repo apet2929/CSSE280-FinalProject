@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 
-import Toast from 'react-bootstrap/Toast';
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-
 import './App.css';
 import { MapView } from './MapView';
 import PageHeader from './PageHeader';
@@ -60,12 +56,9 @@ const App = () => {
     console.log(county_key);
     setCounty(county_key);
     setModalShow(true)
-    
   }
 
   function pageThree(category_key: string) {
-      // do api call
-      
       if(services.length == 0) {
         getServicesByCounty(county).then((data: Service[]) => {
           console.log(data);
@@ -83,12 +76,10 @@ const App = () => {
   ]
 
   let handleClose = (showVal: boolean) => {
-    console.log(showVal);
-    console.log("Lol")  
     setModalShow(showVal)    
   }
 
-  return (
+  return ( 
   <div className="h-100 w-100">
     <PageHeader onLogoClick={() => pageOne()}/>
     <div className="row w-100 justify-content-center">

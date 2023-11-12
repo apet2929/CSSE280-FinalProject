@@ -59,7 +59,7 @@ function ServiceCategoryPopup(props: PopupProps) {
     <>
       <Modal show={props.show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Choose from the categories below and browse programs local to { props.countyName }</Modal.Title>
+          <Modal.Title>Choose from the categories below and browse programs local to { props.countyName } County</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="card categoryCard">

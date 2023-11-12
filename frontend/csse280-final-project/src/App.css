@@ -80,6 +80,9 @@ canvas {
   
 } 
 
+#serviceTable {
+  display: none;
+}
 
 
 @media print {
@@ -92,6 +95,14 @@ canvas {
   }
   * {
     word-wrap: anywhere;
+  }
+
+  #serviceTable {
+    display: inline-block !important;
+  }
+
+  #serviceList {
+    display: none !important;
   }
 
 }
